@@ -28,3 +28,21 @@ cd into your dbt project directory : cd learnDbtSnowflake
 - compile - dbt debug
 - run - dbt run 
 
+###
+    python -c "from cryptography.fernet import Fernet; print(Fernet.generate_key().decode())"
+
+
+### run airflow 
+- docker compose -f .\docker-compose-localExecutor.yaml down (give `-v` for deleting volumes)                                                                                     
+- docker compose -f .\docker-compose-localExecutor.yaml up airflow-init
+- docker compose -f .\docker-compose-localExecutor.yaml up -d
+- then refresh the scheduler 
+  - docker exec -it dockerairflow-airflow-scheduler-1 bash
+    - airflow dags reserialize 
+    - pip install dbt-core dbt-snowflake
+    - don't mount  target logs dbt_packages
+      - remove if done
+        -  cd /opt/airflow/dbt && rm -rf target logs dbt_packages
+
+
+

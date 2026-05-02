@@ -1,0 +1,7 @@
+# dbt artifacts
+learnDbtSnowflake/target/
+learnDbtSnowflake/logs/
+learnDbtSnowflake/dbt_packages/
+
+# airflow artifacts
+dockerAirflow/logs/
