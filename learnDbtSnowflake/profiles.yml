@@ -1,0 +1,26 @@
+learnDbtSnowflake:
+  outputs:
+    dev:
+      account: FSCEYGI-HYB67970
+      database: learn_db
+      password: magic@555!
+      role: developer
+      schema: dev
+      threads: 4
+      type: snowflake
+      user: DBT_RKS
+      warehouse: compute_wh
+  target: dev
+my_dbt_project:
+  outputs:
+    dev:
+      account: FSCEYGI-HYB67970
+      database: learn_db
+      password: magic@555!
+      role: developer
+      schema: dev
+      threads: 4
+      type: snowflake
+      user: DBT_RKS
+      warehouse: compute_wh
+  target: dev
