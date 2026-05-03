@@ -1,7 +1,9 @@
 version: '3.8'
 
 x-airflow-common: &airflow-common
-  build: .
+  build:
+    context: .
+    dockerfile: Dockerfile
   env_file:
     - .env
   environment:
@@ -12,7 +14,7 @@ x-airflow-common: &airflow-common
     AIRFLOW__CORE__LOAD_EXAMPLES: "false"
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
     AIRFLOW_CONFIG: "/opt/airflow/config/airflow.cfg"
-    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: 'http://airflow-apiserver:8080/execution/'
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: "http://airflow-apiserver:8080/execution/"
 
   volumes:
     - ./dags:/opt/airflow/dags
@@ -20,8 +22,8 @@ x-airflow-common: &airflow-common
     - ./plugins:/opt/airflow/plugins
     - ./config:/opt/airflow/config
     - ./sql:/opt/airflow/sql
-    - C:/Users/rakes/PycharmProjects/learnDbtSnpwflake/learnDbtSnowflake:/opt/airflow/dbt
-    - C:/Users/rakes/PycharmProjects/learnDbtSnpwflake/sourceData:/opt/airflow/srcData
+    - ../learnDbtSnowflake:/opt/airflow/dbt
+    - ../sourceData:/opt/airflow/srcData
 
   user: "${AIRFLOW_UID:-50000}:0"
 
@@ -55,7 +57,6 @@ services:
     depends_on:
       - postgres
 
-
   airflow-apiserver:
     <<: *airflow-common
     command: api-server
@@ -76,3 +77,4 @@ services:
 
 volumes:
   postgres-db-volume:
+

@@ -1,3 +1,4 @@
+use database learn_db;
 CREATE OR REPLACE TABLE RAW.CUSTOMERS (
     customer_id STRING,
     customer_unique_id STRING,
