@@ -19,7 +19,9 @@ x-airflow-common: &airflow-common
     - ./logs:/opt/airflow/logs
     - ./plugins:/opt/airflow/plugins
     - ./config:/opt/airflow/config
+    - ./sql:/opt/airflow/sql
     - C:/Users/rakes/PycharmProjects/learnDbtSnpwflake/learnDbtSnowflake:/opt/airflow/dbt
+    - C:/Users/rakes/PycharmProjects/learnDbtSnpwflake/sourceData:/opt/airflow/srcData
 
   user: "${AIRFLOW_UID:-50000}:0"
 
