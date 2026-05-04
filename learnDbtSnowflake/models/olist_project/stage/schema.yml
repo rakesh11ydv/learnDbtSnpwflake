@@ -1,0 +1,9 @@
+version: 1
+
+models:
+  - name: customers_silver
+    description: "customer filtered table for state = SP"
+    database: learn_db
+    schema: stage
+
+
