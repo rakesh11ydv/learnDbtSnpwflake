@@ -22,6 +22,7 @@ x-airflow-common: &airflow-common
     - ./plugins:/opt/airflow/plugins
     - ./config:/opt/airflow/config
     - ./sql:/opt/airflow/sql
+    - ../learnSnowflake/stream:/opt/airflow/streamSql
     - ../learnDbtSnowflake:/opt/airflow/dbt
     - ../sourceData:/opt/airflow/srcData
 

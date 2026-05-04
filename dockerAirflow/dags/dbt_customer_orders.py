@@ -19,7 +19,7 @@ with DAG(
         catchup=None,
         template_searchpath=[
             "/opt/airflow/sql",
-            "/opt/airflow/sql/streams"
+            "/opt/airflow/streamSql"
         ]  # mounted to - learnSnowflake folder in repo
 ) as dag:
     setup_db = snowflakeTask("setup_db", "1_db_setup.sql")
