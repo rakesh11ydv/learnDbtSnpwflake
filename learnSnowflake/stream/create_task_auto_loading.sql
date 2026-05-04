@@ -46,13 +46,13 @@ AS
             then update
                     set
                         F.CUSTOMERID= C.CUSTOMERID,
-                        F.CUSTOMERNAME = C.CUSTOMERNAME
-                        F.ORDERSTATUS = C.ORDERSTATUS
-                        F.TOTALPRICE = C.TOTALPRICE
-                        F.ROW_STATUS = 'UPDATE'
+                        F.CUSTOMERNAME = C.CUSTOMERNAME,
+                        F.ORDERSTATUS = C.ORDERSTATUS,
+                        F.TOTALPRICE = C.TOTALPRICE,
+                        F.ROW_STATUS = 'UPDATE',
                         F.OP_DATE = CURRENT_TIMESTAMP
         when not matched
             then
                 insert (CUSTOMERID, CUSTOMERNAME, ORDERSTATUS, TOTALPRICE, ROW_STATUS, OP_DATE)
-                values (U.CUSTOMERID, U.CUSTOMERNAME, U.ORDERSTATUS, U.TOTALPRICE, 'INSERT', CURRENT_TIMESTAMP))
+                values (U.CUSTOMERID, U.CUSTOMERNAME, U.ORDERSTATUS, U.TOTALPRICE, 'INSERT', CURRENT_TIMESTAMP);
     END;
