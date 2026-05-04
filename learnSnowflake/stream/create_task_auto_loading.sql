@@ -18,7 +18,7 @@ AS
             FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10.CUSTOMER
             LIMIT 100;
 
-        INSERT INTO TPCH_SF10_ORDERS
+        INSERT INTO TPCH_SF10_ORDER
             SELECT *
             FROM SNOWFLAKE_SAMPLE_DATA.TPCH_SF10.ORDERS
             LIMIT 100;
@@ -37,9 +37,9 @@ AS
                 O.O_ORDERSTATUS AS ORDERSTATUS,
                 O.O_TOTALPRICE AS TOTALPRICE,
                 N.N_NAME AS NATIONNAME
-            from raw_src.TPCH_SF10_CUSTOMER_stream C
-            left join raw_src.TPCH_SF10_ORDER_stream O ON C.C_CUSTKEY = O.O_CUSTKEY
-            left join raw_src.TPCH_SF10_NATION_stream N on C.C_NATIONKEY = N.N_NATIONKEY
+            from raw_src.SF10_CUSTOMER_stream C
+            left join raw_src.SF10_ORDER_stream O ON C.C_CUSTKEY = O.O_CUSTKEY
+            left join raw_src.SF10_NATION_stream N on C.C_NATIONKEY = N.N_NATIONKEY
         ) U
         on F.CUSTOMERID = U.CUSTOMERID
         when matched

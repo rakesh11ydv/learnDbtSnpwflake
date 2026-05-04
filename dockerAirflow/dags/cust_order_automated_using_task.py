@@ -13,7 +13,7 @@ def snowflakeTask(task_id, sql):
 
 
 with DAG(
-        dag_id="dbt_customer_orders",
+        dag_id="dbt_customer_orders_automated",
         start_date=datetime(2026, 5, 4),
         schedule=None,
         catchup=None,
@@ -30,9 +30,6 @@ with DAG(
 
     create_stream = snowflakeTask("create_stream", "create_stream.sql")
 
-    change_in_source = snowflakeTask("change_in_source", "change_in_source.sql")
+    auto_refresh_task = snowflakeTask("auto_refresh_task", "create_task_auto_loading.sql")
 
-    update_customer_orders_stg = snowflakeTask("update_customer_orders_stg", "update_customer_orders_stg.sql")
-
-    setup_db >> create_src_tables >> create_tgt_tables >> create_stream>>change_in_source>> update_customer_orders_stg
-
+    setup_db >> create_src_tables >> create_tgt_tables >> create_stream >> auto_refresh_task

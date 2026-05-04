@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CopilotDiffPersistence">
+    <option name="pendingDiffs">
+      <map>
+        <entry key="$PROJECT_DIR$/dockerAirflow/docker-compose-localExecutor-automated.yaml.tmp">
+          <value>
+            <PendingDiffInfo>
+              <option name="filePath" value="$PROJECT_DIR$/dockerAirflow/docker-compose-localExecutor-automated.yaml.tmp" />
+              <option name="updatedContent" value="version: '3.8'&#10;&#10;x-airflow-common: &amp;airflow-common&#10;  build:&#10;    context: .&#10;    dockerfile: Dockerfile.tmp&#10;  env_file:&#10;    - .env&#10;  environment:&#10;    AIRFLOW__CORE__EXECUTOR: LocalExecutor&#10;    AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager&#10;    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow&#10;    AIRFLOW__CORE__FERNET_KEY: ${FERNET_KEY}&#10;    AIRFLOW__CORE__LOAD_EXAMPLES: &quot;false&quot;&#10;    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: &quot;true&quot;&#10;    AIRFLOW_CONFIG: &quot;/opt/airflow/config/airflow.cfg&quot;&#10;    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: &quot;http://airflow-apiserver:8080/execution/&quot;&#10;&#10;  volumes:&#10;    - ./dags:/opt/airflow/dags&#10;    - ./logs:/opt/airflow/logs&#10;    - ./plugins:/opt/airflow/plugins&#10;    - ./config:/opt/airflow/config&#10;    - ./sql:/opt/airflow/sql&#10;    - ../learnDbtSnowflake:/opt/airflow/dbt&#10;    - ../sourceData:/opt/airflow/srcData&#10;&#10;  user: &quot;${AIRFLOW_UID:-50000}:0&quot;&#10;&#10;services:&#10;  postgres:&#10;    image: postgres:16&#10;    environment:&#10;      POSTGRES_USER: airflow&#10;      POSTGRES_PASSWORD: airflow&#10;      POSTGRES_DB: airflow&#10;    volumes:&#10;      - postgres-db-volume:/var/lib/postgresql/data&#10;    restart: always&#10;&#10;  airflow-init:&#10;    &lt;&lt;: *airflow-common&#10;    entrypoint: /entrypoint&#10;    command:&#10;      - bash&#10;      - -c&#10;      - |&#10;        airflow db migrate &amp;&amp; \&#10;        airflow users create \&#10;          --username airflow \&#10;          --password airflow \&#10;          --firstname admin \&#10;          --lastname user \&#10;          --role Admin \&#10;          --email admin@example.com || true&#10;    user: &quot;0:0&quot;&#10;    depends_on:&#10;      - postgres&#10;&#10;  airflow-apiserver:&#10;    &lt;&lt;: *airflow-common&#10;    command: api-server&#10;    ports:&#10;      - &quot;8080:8080&quot;&#10;    restart: always&#10;    depends_on:&#10;      - postgres&#10;      - airflow-init&#10;&#10;  airflow-scheduler:&#10;    &lt;&lt;: *airflow-common&#10;    command: scheduler&#10;    restart: always&#10;    depends_on:&#10;      - postgres&#10;      - airflow-init&#10;&#10;volumes:&#10;  postgres-db-volume:&#10;" />
+            </PendingDiffInfo>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
